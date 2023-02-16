@@ -1,19 +1,21 @@
 package entities;
 
+import entities.enums.Tipo;
+
 public class Piece {
 	
-	private String name;
+	private Tipo tipo;
 	private int linha;
 	private int coluna;
 	
-	public Piece(String name, int linha, int coluna) {
-		this.name = name;
+	public Piece(Tipo tipo, int linha, int coluna) {
+		this.tipo = tipo;
 		this.linha = linha;
 		this.coluna = coluna;
 	}
 
-	public String getName() {
-		return name;
+	public Tipo getTipo() {
+		return tipo;
 	}	
 	
 	
@@ -34,7 +36,7 @@ public class Piece {
 	}
 
 	public String toString() {
-		return name;
+		return tipo.toString();
 	}
 	
 }

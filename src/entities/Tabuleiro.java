@@ -1,9 +1,9 @@
 package entities;
 
+import entities.enums.Tipo;
+
 public class Tabuleiro {
 
-	// char[] linha = { '0', '1', '2' };
-	// char[] coluna = { '0', '1', '2' };
 	Piece[][] tab = new Piece[3][3];
 
 	public Tabuleiro() {
@@ -34,12 +34,12 @@ public class Tabuleiro {
 		}
 	}
 	
-	public void addPeca(String name, String posicao) {
+	public void addPeca(Tipo tipo, String posicao) {
 		int i = Integer.parseInt(posicao.substring(0, 1));
 		int j = Integer.parseInt(posicao.substring(1));
-		Piece piece = new Piece(name, i, j);
+		Piece piece = new Piece(tipo, i, j);
 		if (tab[i][j] != null) {
-			throw new GameException("Posicao" + i + j + " ja esta ocupada por " + tab[i][j].getName());
+			throw new GameException("Posicao " + i + j + " ja esta ocupada por " + tab[i][j].getTipo());
 		} else {
 		tab[i][j] = piece;
 		}
@@ -62,14 +62,14 @@ public class Tabuleiro {
 		return false;
 	}	
 	
-	public boolean verificaLinha(int i, int j) {
+	private boolean verificaLinha(int i, int j) {
 		Piece p1 = tab[i][j];
 		Piece p2 = tab[i][j+1];
 		Piece p3 = tab[i][j+2];
 		if (p1 == null || p2 == null || p3 == null) {
 			return false;
 		} 
-		else if(p1.getName() == p2.getName() && p2.getName() == p3.getName()) {
+		else if(p1.getTipo() == p2.getTipo() && p2.getTipo() == p3.getTipo()) {
 			return true;
 		} 
 		else {
@@ -77,14 +77,14 @@ public class Tabuleiro {
 		}
 	}
 	
-	public boolean verificaColuna(int i, int j) {
+	private boolean verificaColuna(int i, int j) {
 		Piece p1 = tab[i][j];
 		Piece p2 = tab[i+1][j];
 		Piece p3 = tab[i+2][j];
 		if (p1 == null || p2 == null || p3 == null) {
 			return false;
 		} 
-		else if(p1.getName() == p2.getName() && p2.getName() == p3.getName()) {
+		else if(p1.getTipo() == p2.getTipo() && p2.getTipo() == p3.getTipo()) {
 			return true;
 		} 
 		else {
@@ -92,28 +92,27 @@ public class Tabuleiro {
 		}
 	}
 	
-	public boolean verificaDiagonalPrincipal() {
-		//diagonal principal
+	private boolean verificaDiagonalPrincipal() {
 		Piece p1 = tab[0][0];
 		Piece p2 = tab[1][1];
 		Piece p3 = tab[2][2];
 		if (p1 == null || p2 == null || p3 == null) {
 			return false;
 		}
-		else if(p1.getName() == p2.getName() && p2.getName() == p3.getName()) {
+		else if(p1.getTipo() == p2.getTipo() && p2.getTipo() == p3.getTipo()) {
 			return true;
 		} 
 		return false;
 	}
-	public boolean verificaDiagonalSecundaria() {
-		//diagonal secundária
+	
+	private boolean verificaDiagonalSecundaria() {
 		Piece p1 = tab[0][2];
 		Piece p2 = tab[1][1];
 		Piece p3 = tab[2][0];
 		if (p1 == null || p2 == null || p3 == null) {
 			return false;
 		}
-		else if(p1.getName() == p2.getName() && p2.getName() == p3.getName()) {
+		else if(p1.getTipo() == p2.getTipo() && p2.getTipo() == p3.getTipo()) {
 			return true;
 		} 
 		return false;
